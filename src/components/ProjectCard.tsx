@@ -1,7 +1,7 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { Download, QrCode } from '@phosphor-icons/react'
+import { Download } from '@phosphor-icons/react'
 
 interface ProjectCardProps {
   title: string
@@ -10,9 +10,11 @@ interface ProjectCardProps {
   icon: React.ReactNode
   badgeText: string
   badgeVariant?: 'default' | 'secondary' | 'destructive' | 'outline'
+  qrCodeImage: string
+  downloadUrl: string
 }
 
-export function ProjectCard({ title, description, features, icon, badgeText, badgeVariant = 'default' }: ProjectCardProps) {
+export function ProjectCard({ title, description, features, icon, badgeText, badgeVariant = 'default', qrCodeImage, downloadUrl }: ProjectCardProps) {
   return (
     <Card className="group hover:shadow-xl transition-all duration-300 hover:scale-[1.02] border-2">
       <CardHeader>
@@ -44,11 +46,14 @@ export function ProjectCard({ title, description, features, icon, badgeText, bad
         </div>
 
         <div className="pt-4 border-t border-border">
-          <div className="flex items-center justify-center p-8 bg-muted/50 rounded-lg border-2 border-dashed border-border">
+          <div className="flex items-center justify-center p-4 bg-muted/50 rounded-lg border-2 border-border">
             <div className="text-center space-y-2">
-              <QrCode size={48} className="mx-auto text-muted-foreground" />
-              <p className="text-sm text-muted-foreground font-medium">QR Code</p>
-              <p className="text-xs text-muted-foreground">Em breve disponível</p>
+              <img 
+                src={qrCodeImage} 
+                alt={`QR Code ${title}`}
+                className="w-48 h-48 mx-auto object-contain"
+              />
+              <p className="text-sm text-muted-foreground font-medium">Escaneie para baixar</p>
             </div>
           </div>
         </div>
@@ -56,7 +61,7 @@ export function ProjectCard({ title, description, features, icon, badgeText, bad
 
       <CardFooter>
         <Button className="w-full" size="lg" asChild>
-          <a href="#" className="flex items-center justify-center">
+          <a href={downloadUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center">
             <Download className="mr-2" size={20} />
             Baixar APK
           </a>

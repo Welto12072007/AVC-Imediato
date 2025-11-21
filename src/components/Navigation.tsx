@@ -43,10 +43,12 @@ export function Navigation({ onAuthClick }: NavigationProps) {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-lg">+</span>
-            </div>
-            <span className="font-heading font-bold text-lg">TCC Saúde</span>
+            <img 
+              src="/src/assets/imgs/logoDoAvcImediato-removebg-preview.png" 
+              alt="Logo AVC Imediato" 
+              className="w-10 h-10 object-contain"
+            />
+            <span className="font-heading font-bold text-lg">AVC Imediato</span>
           </div>
 
           <div className="hidden md:flex items-center space-x-8">

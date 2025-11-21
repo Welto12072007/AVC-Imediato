@@ -170,6 +170,8 @@ function AppContent() {
                 icon={<Heart size={32} weight="fill" />}
                 badgeText="Prevenção de AVC"
                 badgeVariant="default"
+                qrCodeImage="/src/assets/imgs/QRcodeAVCAlerta-removebg-preview.png"
+                downloadUrl="https://expo.dev/artifacts/eas/ifUmmM35kMkdeLdcWk8irb.apk"
               />
 
               <ProjectCard
@@ -185,6 +187,8 @@ function AppContent() {
                 icon={<FirstAid size={32} weight="fill" />}
                 badgeText="Primeiros Socorros"
                 badgeVariant="secondary"
+                qrCodeImage="/src/assets/imgs/QRcodeSocorroImediato.png"
+                downloadUrl="https://expo.dev/artifacts/eas/gywpE8m6HHq4HeAGax67ki.apk"
               />
             </div>
           </div>
@@ -196,10 +200,12 @@ function AppContent() {
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             <div>
               <div className="flex items-center space-x-2 mb-4">
-                <div className="w-8 h-8 bg-background rounded-lg flex items-center justify-center">
-                  <span className="text-foreground font-bold text-lg">+</span>
-                </div>
-                <span className="font-heading font-bold text-lg">TCC Saúde</span>
+                <img 
+                  src="/src/assets/imgs/logoDoAvcImediato-removebg-preview.png" 
+                  alt="Logo AVC Imediato" 
+                  className="w-10 h-10 object-contain"
+                />
+                <span className="font-heading font-bold text-lg">AVC Imediato</span>
               </div>
               <p className="text-sm text-background/80">
                 Projetos de conclusão de curso focados em tecnologia para saúde e prevenção de emergências.
@@ -225,7 +231,7 @@ function AppContent() {
           <Separator className="bg-background/20 mb-8" />
 
           <div className="text-center text-sm text-background/60">
-            <p>© 2024 TCC Saúde. Todos os direitos reservados.</p>
+            <p>© 2025 AVC Imediato. Todos os direitos reservados.</p>
           </div>
         </div>
       </footer>
