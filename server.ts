@@ -11,7 +11,14 @@ const app = express()
 const PORT = process.env.PORT || 3000
 
 // Middleware
-app.use(cors())
+app.use(cors({
+  origin: [
+    'https://avc-imediato-frontend.onrender.com',
+    'http://localhost:5173',
+    'http://localhost:5000'
+  ],
+  credentials: true
+}))
 app.use(express.json())
 
 // Initialize Neo4j connection
