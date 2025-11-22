@@ -7,6 +7,9 @@ import { ProjectCard } from '@/components/ProjectCard'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { Heart, FirstAid, ArrowRight, CheckCircle } from '@phosphor-icons/react'
+import qrCodeAVCAlerta from '@/assets/imgs/QRcodeAVCAlerta-removebg-preview.png'
+import qrCodeSocorroImediato from '@/assets/imgs/QRcodeSocorroImediato.png'
+import logo from '@/assets/imgs/logoDoAvcImediato-removebg-preview.png'
 
 function AppContent() {
   const [authDialogOpen, setAuthDialogOpen] = useState(false)
@@ -170,7 +173,7 @@ function AppContent() {
                 icon={<Heart size={32} weight="fill" />}
                 badgeText="Prevenção de AVC"
                 badgeVariant="default"
-                qrCodeImage="/src/assets/imgs/QRcodeAVCAlerta-removebg-preview.png"
+                qrCodeImage={qrCodeAVCAlerta}
                 downloadUrl="https://expo.dev/artifacts/eas/ifUmmM35kMkdeLdcWk8irb.apk"
               />
 
@@ -187,7 +190,7 @@ function AppContent() {
                 icon={<FirstAid size={32} weight="fill" />}
                 badgeText="Primeiros Socorros"
                 badgeVariant="secondary"
-                qrCodeImage="/src/assets/imgs/QRcodeSocorroImediato.png"
+                qrCodeImage={qrCodeSocorroImediato}
                 downloadUrl="https://expo.dev/artifacts/eas/gywpE8m6HHq4HeAGax67ki.apk"
               />
             </div>
@@ -201,7 +204,7 @@ function AppContent() {
             <div>
               <div className="flex items-center space-x-2 mb-4">
                 <img 
-                  src="/src/assets/imgs/logoDoAvcImediato-removebg-preview.png" 
+                  src={logo} 
                   alt="Logo AVC Imediato" 
                   className="w-10 h-10 object-contain"
                 />

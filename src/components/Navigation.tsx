@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { useAuth } from '@/hooks/use-auth'
 import { SignOut, List, X } from '@phosphor-icons/react'
+import logo from '@/assets/imgs/logoDoAvcImediato-removebg-preview.png'
 
 interface NavigationProps {
   onAuthClick: () => void
@@ -44,7 +45,7 @@ export function Navigation({ onAuthClick }: NavigationProps) {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center space-x-2">
             <img 
-              src="/src/assets/imgs/logoDoAvcImediato-removebg-preview.png" 
+              src={logo} 
               alt="Logo AVC Imediato" 
               className="w-10 h-10 object-contain"
             />
