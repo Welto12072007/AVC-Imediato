@@ -4,6 +4,8 @@ import { AuthProvider, useAuth } from '@/hooks/use-auth'
 import { Navigation } from '@/components/Navigation'
 import { AuthDialog } from '@/components/AuthDialog'
 import { ProjectCard } from '@/components/ProjectCard'
+import { LikesSection } from '@/components/LikesSection'
+import { CommentsSection } from '@/components/CommentsSection'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { Heart, FirstAid, ArrowRight, CheckCircle } from '@phosphor-icons/react'
@@ -193,6 +195,30 @@ function AppContent() {
                 qrCodeImage={qrCodeSocorroImediato}
                 downloadUrl="https://expo.dev/artifacts/eas/gywpE8m6HHq4HeAGax67ki.apk"
               />
+            </div>
+
+            {/* CRUD Sections - Demonstração Neo4j */}
+            <div className="mt-16 space-y-8">
+              <div className="text-center space-y-4">
+                <h3 className="text-2xl sm:text-3xl font-heading font-bold">Interaja com os Projetos</h3>
+                <p className="text-muted-foreground max-w-2xl mx-auto">
+                  Demonstração de Neo4j e Cypher através de curtidas e comentários
+                </p>
+              </div>
+
+              <div className="grid lg:grid-cols-2 gap-8">
+                <div className="space-y-6">
+                  <h4 className="text-xl font-semibold">AVC Alerta</h4>
+                  <LikesSection projectName="AVC Alerta" />
+                  <CommentsSection projectName="AVC Alerta" />
+                </div>
+
+                <div className="space-y-6">
+                  <h4 className="text-xl font-semibold">Socorro Imediato</h4>
+                  <LikesSection projectName="Socorro Imediato" />
+                  <CommentsSection projectName="Socorro Imediato" />
+                </div>
+              </div>
             </div>
           </div>
         </section>

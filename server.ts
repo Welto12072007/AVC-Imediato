@@ -158,6 +158,134 @@ app.get('/api/users/:userId', async (req: Request, res: Response) => {
   }
 })
 
+// ==================== LIKES API ====================
+
+// Create like
+app.post('/api/likes', async (req: Request, res: Response) => {
+  try {
+    const { userId, projectName } = req.body
+    console.log('👍 Creating like:', { userId, projectName })
+
+    const like = await neo4jService.createLike(userId, projectName)
+    res.status(201).json({ like, message: 'Curtida adicionada!' })
+  } catch (error) {
+    console.error('Create like error:', error)
+    res.status(500).json({ error: 'Erro ao adicionar curtida' })
+  }
+})
+
+// Remove like
+app.delete('/api/likes', async (req: Request, res: Response) => {
+  try {
+    const { userId, projectName } = req.body
+    console.log('👎 Removing like:', { userId, projectName })
+
+    await neo4jService.removeLike(userId, projectName)
+    res.json({ message: 'Curtida removida!' })
+  } catch (error) {
+    console.error('Remove like error:', error)
+    res.status(500).json({ error: 'Erro ao remover curtida' })
+  }
+})
+
+// Get likes by project
+app.get('/api/likes/:projectName', async (req: Request, res: Response) => {
+  try {
+    const { projectName } = req.params
+    const likes = await neo4jService.getLikesByProject(projectName)
+    res.json({ likes, count: likes.length })
+  } catch (error) {
+    console.error('Get likes error:', error)
+    res.status(500).json({ error: 'Erro ao buscar curtidas' })
+  }
+})
+
+// Check if user liked
+app.get('/api/likes/:projectName/:userId', async (req: Request, res: Response) => {
+  try {
+    const { projectName, userId } = req.params
+    const liked = await neo4jService.checkUserLike(userId, projectName)
+    res.json({ liked })
+  } catch (error) {
+    console.error('Check like error:', error)
+    res.status(500).json({ error: 'Erro ao verificar curtida' })
+  }
+})
+
+// ==================== COMMENTS API ====================
+
+// Create comment
+app.post('/api/comments', async (req: Request, res: Response) => {
+  try {
+    const { userId, projectName, text } = req.body
+    console.log('💬 Creating comment:', { userId, projectName, text })
+
+    if (!text || text.trim().length === 0) {
+      return res.status(400).json({ error: 'Comentário não pode estar vazio' })
+    }
+
+    const comment = await neo4jService.createComment(userId, projectName, text.trim())
+    res.status(201).json({ comment, message: 'Comentário adicionado!' })
+  } catch (error) {
+    console.error('Create comment error:', error)
+    res.status(500).json({ error: 'Erro ao adicionar comentário' })
+  }
+})
+
+// Get comments by project
+app.get('/api/comments/:projectName', async (req: Request, res: Response) => {
+  try {
+    const { projectName } = req.params
+    const comments = await neo4jService.getCommentsByProject(projectName)
+    res.json({ comments, count: comments.length })
+  } catch (error) {
+    console.error('Get comments error:', error)
+    res.status(500).json({ error: 'Erro ao buscar comentários' })
+  }
+})
+
+// Update comment
+app.put('/api/comments/:commentId', async (req: Request, res: Response) => {
+  try {
+    const { commentId } = req.params
+    const { userId, text } = req.body
+    console.log('✏️ Updating comment:', { commentId, userId })
+
+    if (!text || text.trim().length === 0) {
+      return res.status(400).json({ error: 'Comentário não pode estar vazio' })
+    }
+
+    const updated = await neo4jService.updateComment(commentId, userId, text.trim())
+    if (!updated) {
+      return res.status(404).json({ error: 'Comentário não encontrado ou sem permissão' })
+    }
+
+    res.json({ message: 'Comentário atualizado!' })
+  } catch (error) {
+    console.error('Update comment error:', error)
+    res.status(500).json({ error: 'Erro ao atualizar comentário' })
+  }
+})
+
+// Delete comment
+app.delete('/api/comments/:commentId', async (req: Request, res: Response) => {
+  try {
+    const { commentId } = req.params
+    const { userId } = req.body
+    console.log('🗑️ Deleting comment:', { commentId, userId })
+
+    const deleted = await neo4jService.deleteComment(commentId, userId)
+    if (!deleted) {
+      return res.status(404).json({ error: 'Comentário não encontrado ou sem permissão' })
+    }
+
+    res.json({ message: 'Comentário deletado!' })
+  } catch (error) {
+    console.error('Delete comment error:', error)
+    res.status(500).json({ error: 'Erro ao deletar comentário' })
+  }
+})
+
 // Start server
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`)
